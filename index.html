@@ -1,2 +1,134 @@
-<h1>🛡️ AlertaGolpe Guardian</h1>
-<p>A minha aplicação está a funcionar!</p>
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080e20">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Guardian">
+<title>AlertaGolpe Guardian</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080e20;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.app{max-width:520px;margin:auto;padding:22px 18px 45px}
+.top{display:flex;align-items:center;justify-content:space-between}
+.brand{font-size:17px;font-weight:750;letter-spacing:-.4px}
+.tag{font-size:11px;color:#8fe9d2;border:1px solid #286f70;border-radius:20px;padding:7px 10px}
+.hero{text-align:center;padding:30px 0 18px}
+.shield{width:112px;height:112px;border-radius:34px;display:grid;place-items:center;margin:auto;background:linear-gradient(145deg,#253b82,#7b50d5);font-size:59px;box-shadow:0 15px 55px #5146d455}
+h1{font-size:30px;letter-spacing:-1px;margin:22px 0 8px}
+.muted{color:#a3b0ce;font-size:14px;line-height:1.6}
+.card{background:linear-gradient(145deg,#182442,#101a33);border:1px solid #2b3b61;border-radius:23px;padding:21px;margin:14px 0}
+.card h2{font-size:19px;margin:0 0 10px}
+.stat{color:#90f1d3;font-weight:650;font-size:13px}
+button{cursor:pointer;font-family:inherit}
+.primary{width:100%;padding:16px;border:0;border-radius:15px;color:white;font-size:16px;font-weight:700;background:linear-gradient(100deg,#526aff,#9764e9);margin-top:13px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{background:#182443;border:1px solid #30416a;border-radius:19px;padding:20px 12px;text-align:left;color:white;font-size:15px;font-weight:650;min-height:120px}
+.tile span{display:block;font-size:30px;margin-bottom:13px}
+nav{display:flex;gap:7px;margin:16px 0}
+nav button{flex:1;border:1px solid #2c3d63;border-radius:12px;padding:11px 4px;background:#16213d;color:#b5c2df;font-size:12px}
+nav button.active{background:#6159cb;color:white}
+textarea{width:100%;min-height:155px;background:#09142c;border:1px solid #40517b;color:white;border-radius:15px;padding:14px;font:16px -apple-system,sans-serif;resize:vertical}
+.result{border:1px solid #4c6593;border-radius:18px;padding:18px;margin-top:15px;background:#172644}
+.result.high{border-color:#ee8091;background:#442033}
+.result h3{margin:0 0 10px}
+.result li{margin:8px 0}
+.small{font-size:12px;color:#aab8d3;line-height:1.6}
+footer{text-align:center;color:#7788aa;font-size:12px;padding:25px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="top"><div class="brand">🛡️ AlertaGolpe <span style="color:#a991ff">Guardian</span></div><div class="tag">● PRIVADO</div></div>
+<div class="hero">
+<div class="shield">🛡️</div>
+<h1>A tua tranquilidade.<br>Protegida.</h1>
+<p class="muted">Identifica sinais de fraude antes de responderes, clicares ou pagares.</p>
+</div>
+<nav>
+<button class="active" onclick="go('inicio',this)">Início</button>
+<button onclick="go('mensagens',this)">Mensagens</button>
+<button onclick="go('chamadas',this)">Chamadas</button>
+<button onclick="go('resgate',this)">Resgate</button>
+</nav>
+<section id="inicio">
+<div class="card">
+<div class="stat">✦ GUARDIAN ATIVO PARA CONSULTAS</div>
+<h2 style="margin-top:13px">O teu escudo digital</h2>
+<p class="muted">Analisa situações suspeitas manualmente, com explicações claras.</p>
+<button class="primary" onclick="go('mensagens',document.querySelectorAll('nav button')[1])">Analisar agora →</button>
+</div>
+<div class="actions">
+<button class="tile" onclick="go('mensagens',document.querySelectorAll('nav button')[1])"><span>✉️</span>Verificar mensagem</button>
+<button class="tile" onclick="go('chamadas',document.querySelectorAll('nav button')[2])"><span>📞</span>Analisar chamada</button>
+<button class="tile" onclick="go('resgate',document.querySelectorAll('nav button')[3])"><span>🚨</span>Preciso de ajuda</button>
+<button class="tile" onclick="alert('Nunca partilhes códigos de autenticação. Confirma pedidos através de contactos oficiais.')"><span>💡</span>Dica de segurança</button>
+</div>
+</section>
+<section id="mensagens" hidden>
+<div class="card">
+<h2>✉️ Verificar mensagem</h2>
+<p class="muted">Cola o texto de uma SMS, email ou WhatsApp suspeito. Remove nomes, números e dados privados.</p>
+<textarea id="texto" placeholder="Cola aqui a mensagem..."></textarea>
+<button class="primary" onclick="analisar('texto')">Analisar mensagem →</button>
+</div>
+</section>
+<section id="chamadas" hidden>
+<div class="card">
+<h2>📞 Analisar chamada</h2>
+<p class="muted">Descreve o que a pessoa disse ou pediu durante a chamada.</p>
+<textarea id="chamada" placeholder="Ex.: Disseram ser do banco e pediram um código..."></textarea>
+<button class="primary" onclick="analisar('chamada')">Analisar chamada →</button>
+</div>
+</section>
+<section id="resgate" hidden>
+<div class="card">
+<h2>🚨 Modo Resgate</h2>
+<p class="muted">Se achas que foste vítima de uma burla, age rapidamente.</p>
+<p>1. Contacta o banco pelos canais oficiais se fizeste um pagamento.</p>
+<p>2. Altera palavras-passe comprometidas e termina sessões desconhecidas.</p>
+<p>3. Não forneças mais códigos nem dinheiro.</p>
+<p>4. Guarda mensagens e comprovativos e apresenta denúncia às autoridades.</p>
+<p class="small">Se houver perigo imediato, contacta os serviços de emergência locais.</p>
+</div>
+</section>
+<div id="resultado" class="result" hidden aria-live="polite"></div>
+<footer>AlertaGolpe Guardian · Protótipo v1<br>Análise local por regras · Não monitoriza chamadas ou mensagens automaticamente.</footer>
+</div>
+<script>
+function go(id,btn){
+document.querySelectorAll('section').forEach(x=>x.hidden=x.id!==id);
+document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+if(btn)btn.classList.add('active');
+document.getElementById('resultado').hidden=true;
+}
+function analisar(id){
+const texto=document.getElementById(id).value;
+const box=document.getElementById('resultado');
+box.replaceChildren();box.hidden=false;
+if(!texto.trim()){box.textContent='Escreve ou cola primeiro o texto a analisar.';return}
+const regras=[
+[/urgente|imediat|agora|24 horas|última oportunidade/i,'Pressão para agir depressa',2],
+[/bloquead|suspend|multa|ameaç/i,'Ameaça ou consequência alarmante',2],
+[/https?:\/\/|www\.|clique|link/i,'Link ou pedido para abrir uma página',2],
+[/pin|código|codigo|senha|password|palavra.passe|dados bancários/i,'Pedido de informação sensível',4],
+[/mb ?way|transferência|iban|pagamento|bitcoin/i,'Pedido relacionado com dinheiro',3],
+[/prémio|ganhou|sorteio|lucro garantido/i,'Promessa de recompensa',2],
+[/anydesk|teamviewer|acesso remoto/i,'Pedido de acesso remoto',4]
+];
+let pontos=0;const sinais=[];
+regras.forEach(r=>{if(r[0].test(texto)){pontos+=r[2];sinais.push(r[1])}});
+const nivel=pontos>=6?'Elevado':pontos>=3?'Moderado':'Indeterminado';
+box.className='result'+(pontos>=6?' high':'');
+const h=document.createElement('h3');h.textContent='Risco estimado: '+nivel;box.appendChild(h);
+const p=document.createElement('p');
+p.textContent=pontos>=6?'Não respondas nem partilhes dados. Confirma diretamente com a instituição oficial.':pontos>=3?'Existem sinais que justificam cautela. Verifica a origem por canais oficiais.':'Não foram encontrados sinais fortes pelas regras disponíveis. Isto não significa que seja seguro.';
+box.appendChild(p);
+if(sinais.length){const ul=document.createElement('ul');sinais.forEach(s=>{const li=document.createElement('li');li.textContent=s;ul.appendChild(li)});box.appendChild(ul)}
+const nota=document.createElement('p');nota.className='small';nota.textContent='Esta análise é indicativa. Não verifica a identidade do remetente, a reputação de links ou números e pode falhar.';box.appendChild(nota);
+}
+</script>
+</body>
+</html>
